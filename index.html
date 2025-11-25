@@ -18,6 +18,11 @@
             <a href="#home" class="nav-logo">
                 <img src="assets/images/logo.png" alt="MG REDES Logo" class="nav-logo-img">
             </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Início</a></li>
                 <li><a href="#sobre" class="nav-link">Quem Somos</a></li>
@@ -44,7 +49,7 @@
     </header>
 
     <!-- Quem Somos (Image 2) -->
-    <section class="about-section" id="sobre">
+    <section class="about-section scroll-reveal" id="sobre">
         <div class="container">
             <h2 class="section-title">Quem Somos</h2>
             <div class="about-content grid-2-cols">
@@ -69,7 +74,7 @@
     </section>
 
     <!-- Nossos Serviços Principais (Image 3) -->
-    <section class="main-services-section" id="servicos">
+    <section class="main-services-section scroll-reveal" id="servicos">
         <div class="container grid-2-cols-diagonal">
             <div class="service-image-container">
                 <img src="assets/images/mecanico-interior.jpg" alt="Técnico MG Redes instalando rastreador" class="service-image">
@@ -107,7 +112,7 @@
     </section>
 
     <!-- Serviços Técnicos e Industriais (Image 4) -->
-    <section class="technical-services-section">
+    <section class="technical-services-section scroll-reveal">
         <div class="container">
             <h2 class="section-title">Serviços Técnicos e Industriais</h2>
             <p class="section-intro">Na vanguarda da inovação em serviços técnicos e industriais, oferecemos soluções completas e especializadas para otimizar a segurança, eficiência e funcionalidade de seus veículos e equipamentos. Nossa expertise abrange desde a instalação de sistemas avançados até a manutenção contínua, garantindo desempenho e confiabilidade.</p>
@@ -208,7 +213,7 @@
     </section>
 
     <!-- Benefícios para o Cliente -->
-    <section class="benefits-section">
+    <section class="benefits-section scroll-reveal">
         <div class="container">
             <h2 class="section-title text-center">Benefícios para o Cliente</h2>
             <div class="benefit-grid">
@@ -237,7 +242,7 @@
     </section>
 
     <!-- Transporte e Logística (Image 5) -->
-    <section class="logistics-section" id="logistica">
+    <section class="logistics-section scroll-reveal" id="logistica">
         <div class="container">
             <h2 class="section-title">Transporte e Logística</h2>
             <div class="grid-2-cols-diagonal-reverse">
@@ -279,7 +284,7 @@
     </section>
 
     <!-- Energia e Telecom (Image 6) -->
-    <section class="energy-telecom-section">
+    <section class="energy-telecom-section scroll-reveal">
         <div class="container">
             <h2 class="section-title">Energia, Telecomunicações e Serviços Complementares</h2>
             <div class="grid-3-cols">
@@ -320,7 +325,7 @@
     </section>
 
     <!-- Por Que Escolher (Image 7) -->
-    <section class="why-choose-section" id="contato">
+    <section class="why-choose-section scroll-reveal" id="contato">
         <div class="container">
             <h2 class="section-title">Por Que Escolher a MG Redes?</h2>
             <div class="grid-2-cols">
@@ -389,6 +394,42 @@
 
     <script>
         lucide.createIcons();
+        
+        // Mobile menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+        
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
